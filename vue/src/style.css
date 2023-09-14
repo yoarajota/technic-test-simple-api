@@ -1,0 +1,17 @@
+:root {
+  --palete-color1: #263640;
+  --palete-color2: #516373;
+  --palete-color3: #7C92A6;
+  --palete-color4: #ADC5D9;
+  --palete-color5: #DFE7F2;
+}
+
+.right-shadow {
+  box-shadow: 5px 1px 15px 1px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 5px 1px 15px 1px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 5px 1px 15px 1px rgba(0, 0, 0, 0.4);
+}
+
+body {
+  background-color: var(--palete-color1);
+}
