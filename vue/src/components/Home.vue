@@ -5,7 +5,7 @@
 </script>
 
 <template>
-    oiasdasdsadksalkdjsakldjsakljdsklajdsklalsakjdslakjdslakjd
+    Home
 </template>
 
 <style scoped></style>
