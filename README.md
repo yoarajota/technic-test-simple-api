@@ -15,7 +15,7 @@ Primeiramente, verifique se está sendo rodado o serviço MYSQL
 Pelo terminal, dentro da pasta do projeto, apenas rode ~ 'start .\start.bat'.
 Fique atento aos retornos dos Prompts de Comando. Alguns solicitarão algum input.
 
-No projeto do VUE, o .env utiliza a rota do backend. Caso rode em uma fora do padrão, necessário ajustá-la.
+Na aplicação do frontend, seu .env utiliza a rota do backend. Caso rode em uma fora do padrão,é necessário ajustá-la.
 
 ## Observações:
 ### por favor, leia;
