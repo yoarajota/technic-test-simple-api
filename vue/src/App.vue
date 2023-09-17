@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import SideBar from './components/SideBar.vue'
-import { MenuItem } from './types';
 
-const menuItens: Array<MenuItem> = [{ name: "Clientes", icon: "/person.svg", path: "/temp-clientes" }];
 </script>
 
 <template>
-  <SideBar :menuItens="menuItens" />
+  <SideBar />
   <main>
     <router-view />
   </main>
@@ -14,6 +12,8 @@ const menuItens: Array<MenuItem> = [{ name: "Clientes", icon: "/person.svg", pat
 
 <style scoped>
 main {
-  z-index: 1;
+  position: relative;
+  margin: 1em 1.5em 1em calc(1.5em + (4em + 16px));
+  width: 100%;
 }
 </style>
