@@ -32,6 +32,6 @@ Melhorias que tenho ciência de ser extremamente necessário;
 7. Cache.
 
 Sinta-se livre para visitar minhas aplicações!
-https://yoarajota.vercel.app
-https://matchboxd.vercel.app
-https://ioweasy.vercel.app
++ https://yoarajota.vercel.app
++ https://matchboxd.vercel.app
++ https://ioweasy.vercel.app
