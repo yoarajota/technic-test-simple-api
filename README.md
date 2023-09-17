@@ -23,13 +23,13 @@ No projeto do VUE, o .env utiliza a rota do backend. Caso rode em uma fora do pa
 Tempo gasto em código: aproximadamente 14/15 horas.
 
 Melhorias que tenho ciência de ser extremamente necessário; 
-1- Design.
-2- Melhorar validação na ponta do cliente.
-3- Criar novos tipos de INPUT para validações específicas; "telefone", "documento".
-4- Utilizar o FileSystem para o gerenciamento dos arquivos (possibilita integrações com ObjectStorage, como por exemplo o s3 da AWS e o BlobStorage da Azure).
-5- Testes. Pensei em montar o projeto em base de TDD (Test-driven development), porém ficou apertado o tempo.
-6- Paginações.
-7- Cache.
+1. Design.
+2. Melhorar validação na ponta do cliente.
+3. Criar novos tipos de INPUT para validações específicas; "telefone", "documento".
+4. Utilizar o FileSystem para o gerenciamento dos arquivos (possibilita integrações com ObjectStorage, como por exemplo o s3 da AWS e o BlobStorage da Azure).
+5. Testes. Pensei em montar o projeto em base de TDD (Test-driven development), porém ficou apertado o tempo.
+6. Paginações.
+7. Cache.
 
 Sinta-se livre para visitar minhas aplicações!
 https://yoarajota.vercel.app
