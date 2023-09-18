@@ -1,4 +1,4 @@
 export default {
-  Contacts: "Contantos",
+  Contacts: "Contatos",
   Customers: "Clientes",
 } as { [key: string]: string };
