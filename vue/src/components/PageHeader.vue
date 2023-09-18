@@ -14,7 +14,7 @@ function goBack() {
 </script>
 
 <template>
-    <header>
+    <header class="right-shadow">
         <d-button id="go-back-button" v-on:click="goBack">
             <span class="material-symbols-outlined">
                 arrow_back
@@ -32,7 +32,11 @@ header {
     align-items: center;
     gap: 25px;
     width: 100%;
-    height: calc(5em + 10px);
+    height: calc(4em + 10px);
+    margin: 0 0 1em 0;
+    border-radius: 12px;
+    padding: 5px 12px;
+    background-color: var(--palete-color4);
 
     @media screen and (max-width: 375px) {
         margin-top: 35px;

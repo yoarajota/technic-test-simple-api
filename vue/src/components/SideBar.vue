@@ -1,14 +1,18 @@
 <script setup lang="ts">
 
 import type { MenuItem } from '../types'
-import { fixHeader, makeRequest } from '../helpers';
+import { fixHeader, makeRequest, translate } from '../helpers';
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 const menuItems = ref<Array<MenuItem>>([]);
 
+const route = useRoute()
+console.log(route.path);
+
 const fetchMenuItems = async () => {
     const response = await fetch(makeRequest("menu"));
-    menuItems.value = await response.json();
+    menuItems.value = (await response.json()).menu;
 };
 
 fetchMenuItems();
@@ -32,19 +36,31 @@ fetchMenuItems();
                 </section>
             </template>
         </Suspense>
+        <section v-if="route.path !== '/'" class="wrap-side-bar-item">
+            <router-link :to="`/`">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+                <span>
+                    <p>
+                        {{translate("Home")}}
+                    </p>
+                </span>
+            </router-link>
+        </section>
     </aside>
 </template>
 
 <style lang="scss" scoped>
 #wrap-side-bar {
-    min-height: calc(100vh - 10px);
+    min-height: calc(100vh - 35px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: calc(4em + 16px);
     position: fixed;
-    margin: 5px 0 0 5px;
+    margin: 15px 0 0 5px;
     border-radius: 8px;
     background-color: var(--palete-color4);
     z-index: 10;

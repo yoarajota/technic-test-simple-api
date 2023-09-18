@@ -11,7 +11,7 @@ class RegistersController extends Controller
     public function index(Request $request)
     {
         try {
-            return $this->success(Registers::all()->toArray());
+            return $this->success(["menu" => Registers::all()->toArray()]);
         } catch (Exception $e) {
             return $this->error($e);
         }

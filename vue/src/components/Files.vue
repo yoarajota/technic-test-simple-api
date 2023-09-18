@@ -107,24 +107,24 @@ async function download(file: string) {
     </span>
     <div class="wrap-files">
         <span v-if="holdPath.length > 0">
-            <span class="material-symbols-outlined" @click="returnPreview">
+            <span class="material-symbols-outlined clickable" @click="returnPreview">
                 keyboard_return
             </span>
         </span>
         <span v-for="(relation, key) of preview">
-            <span class="material-symbols-outlined" @click="handle(key, relation)">
+            <span class="material-symbols-outlined clickable" @click="handle(key, relation)">
                 {{ relation.type === "file" ? "download" : "folder" }}
             </span>
         </span>
         <span id="add">
             <span @click="addFolder" title="Adicionar uma pasta.">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined clickable">
                     folder_copy
                 </span>
             </span>
             <span>
                 <label for="file" title="Adicionar um arquivo.">
-                    <span class="material-symbols-outlined">
+                    <span class="material-symbols-outlined clickable">
                         upload_file
                     </span>
                 </label>
@@ -136,6 +136,13 @@ async function download(file: string) {
 </template>
 
 <style  lang="scss" scoped>
+.clickable {
+    cursor: pointer;
+    font-size: 2.2rem;
+    margin: 5px;
+}
+
+
 .wrap-files {
     border: 1px solid var(--palete-color5);
     padding: 20px 15px;

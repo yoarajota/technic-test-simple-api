@@ -13,7 +13,7 @@ import SideBar from './components/SideBar.vue'
 <style lang="scss" scoped>
 main {
   position: relative;
-  margin: 1em 1.5em 1em calc(1.5em + (4em + 16px));
+  margin: 15px 1.5em 1em calc(1.5em + (4em + 16px));
   width: 100%;
 
     @media screen and (max-width: 375px) {

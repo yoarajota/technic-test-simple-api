@@ -48,7 +48,7 @@ async function deleteRegister(index: number) {
 
 <template>
     <PageHeader :title="register" />
-    <div id="wrap-include-button" class="default-submit-button">
+    <div id="wrap-include-button" class="default-submit-button right-shadow">
         <b-button type="submit" variant="primary" @click="router.push({ path: 'form-' + register })">
             Incluir
         </b-button>
@@ -89,7 +89,10 @@ table {
     width: 100%;
     margin-bottom: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.068);
-    padding-bottom: 15px;
+    padding: 15px 0 15px 0;
+    border-radius: 12px;
+    background-color: var(--palete-color4);
+    align-items: center;
 }
 
 #wrap-table {
