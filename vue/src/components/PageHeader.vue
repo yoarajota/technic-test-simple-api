@@ -33,6 +33,10 @@ header {
     gap: 25px;
     width: 100%;
     height: calc(5em + 10px);
+
+    @media screen and (max-width: 375px) {
+        margin-top: 35px;
+    }
 }
 
 #go-back-button {

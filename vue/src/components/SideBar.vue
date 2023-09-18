@@ -47,6 +47,7 @@ fetchMenuItems();
     margin: 5px 0 0 5px;
     border-radius: 8px;
     background-color: var(--palete-color4);
+    z-index: 10;
 
     p {
         margin: 0;
@@ -88,6 +89,14 @@ fetchMenuItems();
                 opacity: 0.8;
             }
         }
+    }
+
+    @media screen and (max-width: 375px) {
+        margin: 0;
+        width: 100vw;
+        height: 40px;
+        min-height: 40px;
+        top: 0;
     }
 }
 </style>
