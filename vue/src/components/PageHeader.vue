@@ -39,7 +39,7 @@ header {
     background-color: var(--palete-color4);
 
     @media screen and (max-width: 375px) {
-        margin-top: 35px;
+        margin-top: 55px;
     }
 }
 
