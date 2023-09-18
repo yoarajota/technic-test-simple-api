@@ -38,7 +38,6 @@ fetchMenuItems();
 <style lang="scss" scoped>
 #wrap-side-bar {
     min-height: calc(100vh - 10px);
-    border: 2px solid var(--palete-color2);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -47,7 +46,7 @@ fetchMenuItems();
     position: fixed;
     margin: 5px 0 0 5px;
     border-radius: 8px;
-    background-color: var(--palete-color1);
+    background-color: var(--palete-color4);
 
     p {
         margin: 0;

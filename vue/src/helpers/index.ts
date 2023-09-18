@@ -15,6 +15,10 @@ export function bootstrapTableTranslateFields(
 }
 
 export function fixHeader(string: string) {
+  if (!string) {
+    return "";
+  }
+
   return translate(string.charAt(0).toUpperCase() + string.slice(1));
 }
 

@@ -39,9 +39,6 @@ async function addFile(event: Event) {
                 file: reader.result
             })
         }
-        reader.onerror = function (error) {
-            console.log('Error: ', error);
-        };
     }
 }
 
@@ -96,7 +93,6 @@ function getFileTypeFromBase64(base64String: string) {
 async function download(file: string) {
     const downloadLink = document.createElement('a');
     downloadLink.href = file;
-    console.log(getFileTypeFromBase64(file))
     downloadLink.download = "download." + getFileExtensionFromMimeType(getFileTypeFromBase64(file));
     downloadLink.click();
 }
@@ -139,7 +135,7 @@ async function download(file: string) {
     </div>
 </template>
 
-<style scoped>
+<style  lang="scss" scoped>
 .wrap-files {
     border: 1px solid var(--palete-color5);
     padding: 20px 15px;

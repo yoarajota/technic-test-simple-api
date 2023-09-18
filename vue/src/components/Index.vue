@@ -18,9 +18,7 @@ const fetchData = async () => {
     const response = await (await fetch(makeRequest(route.path.substring(1)))).json();
     fields.value = response.fields;
     data.value = response.data;
-    console.log(data.value, fields.value)
 };
-
 
 fetchData();
 
@@ -50,15 +48,15 @@ async function deleteRegister(index: number) {
 
 <template>
     <PageHeader :title="register" />
-    <div id="wrap-include-button">
+    <div id="wrap-include-button" class="default-submit-button">
         <b-button type="submit" variant="primary" @click="router.push({ path: 'form-' + register })">
             Incluir
         </b-button>
     </div>
     <Suspense>
         <template #default>
-            <div id="wrap-table">
-                <b-table @row-clicked="redirect" sticky-header small borderless striped hover :items="data"
+            <div id="wrap-table" class="right-shadow">
+                <b-table @row-clicked="redirect" sticky-header small borderless striped hover head-variant="dark" responsive :items="data"
                     :fields="[...bootstrapTableTranslateFields(fields), { key: 'Deletar', name: 'delete' }]">
                     <template #cell(Deletar)="name">
                         <button class="button material-symbols-outlined" size="sm" type="button"
@@ -71,7 +69,15 @@ async function deleteRegister(index: number) {
     </Suspense>
 </template>
 
-<style scoped>
+<style>
+.table > :not(caption) > * > * {
+    background: var(--palete-color4) !important;
+}
+</style>
+
+<style lang="scss" scoped>
+$enable-shadows: true;
+
 table {
     width: 80%;
     margin: auto;
@@ -85,4 +91,12 @@ table {
     border-bottom: 1px solid rgba(0, 0, 0, 0.068);
     padding-bottom: 15px;
 }
+
+#wrap-table {
+    padding: 10px 12px;
+    border-radius: 12px;
+    height: 55vh;
+    background-color: var(--palete-color4);
+}
+
 </style>

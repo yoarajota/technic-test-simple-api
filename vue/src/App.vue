@@ -10,7 +10,7 @@ import SideBar from './components/SideBar.vue'
   </main>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 main {
   position: relative;
   margin: 1em 1.5em 1em calc(1.5em + (4em + 16px));

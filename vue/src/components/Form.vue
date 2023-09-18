@@ -75,7 +75,7 @@ async function onSubmit(event: Event) {
     <PageHeader :title="id ? register + ' ' + id : register" />
     <Suspense>
         <template #default>
-            <b-form id="form" @submit="onSubmit">
+            <b-form id="form" @submit="onSubmit" class="right-shadow">
                 <div v-for="(formPart) in     forms    ">
                     <span v-if="formPart.type === 'list'">
                         <b-form :id="formPart.name" class="inline-form" @submit="addLine">
@@ -132,7 +132,7 @@ async function onSubmit(event: Event) {
                         <Files :canDownload="!!id" :model="data[formPart.name]" />
                     </span>
                 </div>
-                <span id="wrap-submit">
+                <span id="wrap-submit" class="default-submit-button">
                     <b-button type="submit" variant="primary">
                         <div v-if="!submiting" class="button-submit m-0">
                             {{ id ? "Atualizar cadastro" : "Salvar" }}
@@ -148,7 +148,7 @@ async function onSubmit(event: Event) {
     </Suspense>
 </template>
 
-<style scoped>
+<style  lang="scss" scoped>
 .grid-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -185,6 +185,9 @@ async function onSubmit(event: Event) {
     position: relative;
     height: calc(100% + 400px);
     width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background-color: var(--palete-color4);
 }
 
 #wrap-submit {
