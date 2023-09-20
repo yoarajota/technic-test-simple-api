@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { PropType } from 'vue';
+import { makeRequest } from '../helpers';
+import { useRoute } from 'vue-router';
 
 const props = defineProps({
     model: {
@@ -8,6 +10,9 @@ const props = defineProps({
         required: true,
     }
 });
+
+const route = useRoute()
+const [register, id] = route.params.register;
 
 const preview = ref(props.model);
 const holdPath = ref<Array<number>>([]);
@@ -62,39 +67,16 @@ function changePreview(key: number, folder: any) {
 function handle(key: number, folder: any) {
     if (folder.type === "folder") {
         changePreview(key, folder);
-    } else {
-        download(folder.file);
+    } else if (id) {
+        download(folder.path);
     }
 }
 
-
-
-function getFileExtensionFromMimeType(mimeType: string) {
-    const mimeTypesToExtensions: { [key: string]: string } = {
-        'image/jpeg': 'jpg',
-        'image/png': 'png',
-        'application/pdf': 'pdf',
-        'text/plain': 'txt',
-    };
-
-    return mimeTypesToExtensions[mimeType] || 'dat'; // Default to 'dat' if MIME type is unknown
-}
-
-function getFileTypeFromBase64(base64String: string) {
-    const match = base64String.match(/^data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+);base64/);
-
-    if (match && match[1]) {
-        return match[1];
-    } else {
-        return 'application/octet-stream';
-    }
-}
-
-async function download(file: string) {
-    const downloadLink = document.createElement('a');
-    downloadLink.href = file;
-    downloadLink.download = "download." + getFileExtensionFromMimeType(getFileTypeFromBase64(file));
-    downloadLink.click();
+async function download(path: string) {
+    fetch(makeRequest('download-files-' + register + `?path=${path}`)).then(async (blob) => {
+        var file = window.URL.createObjectURL(await blob.blob());
+        window.open(file);
+    });
 }
 
 </script>
@@ -174,7 +156,7 @@ async function download(file: string) {
 }
 
 #add {
-    color: green;
+    color: var(--palete-color5);
 }
 
 #title {

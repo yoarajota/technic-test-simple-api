@@ -15,11 +15,11 @@ function goBack() {
 
 <template>
     <header class="right-shadow">
-        <d-button id="go-back-button" v-on:click="goBack">
+        <button id="go-back-button" v-on:click="goBack">
             <span class="material-symbols-outlined">
                 arrow_back
             </span>
-        </d-button>
+        </button>
         <h1>
             {{ fixHeader(title) }}
         </h1>
@@ -30,9 +30,9 @@ function goBack() {
 header {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 5px;
     width: 100%;
-    height: calc(4em + 10px);
+    height: calc(1.2em + 10px);
     margin: 0 0 1em 0;
     border-radius: 12px;
     padding: 5px 12px;
@@ -40,6 +40,24 @@ header {
 
     @media screen and (max-width: 375px) {
         margin-top: 55px;
+    }
+
+    display: flex;
+    align-items: center;
+
+    button {
+        background: none;
+        border: none;
+        height: calc(1.2em + 10px);
+
+        span {
+            height: 100%;
+        }
+    }
+
+    h1 {
+        font-size: 1.2em;
+        margin: 0;
     }
 }
 

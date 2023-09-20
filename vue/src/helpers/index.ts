@@ -1,4 +1,4 @@
-import translations from "../../public/translations"
+import translations from "../extra/translations"
 
 export function makeRequest(string: string) {
   return import.meta.env.VITE_SERVER_URL + string;
@@ -14,6 +14,23 @@ export function bootstrapTableTranslateFields(
   }));
 }
 
+
+export function findSelectColor(data: { [key: string]: any }) {
+  return (
+    data.field?.options.find(
+      (option: { [key: string]: any }) =>
+        option.value === data.item["real_" + data.field.key]
+    )?.class ?? ""
+  );
+}
+
+export function isRequired(validations: Array<{ [key: string]: any }>) {
+  return !!validations.find(
+    (validation: { [key: string]: any }) => validation.type === "required"
+  );
+}
+
+
 export function fixHeader(string: string) {
   if (!string) {
     return "";
@@ -23,5 +40,5 @@ export function fixHeader(string: string) {
 }
 
 export function translate(string: string) {
-  return translations?.[string];
+  return translations?.[string] ?? string;
 }

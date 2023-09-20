@@ -85,9 +85,9 @@ class BootupApi extends Seeder
                 "label" => "Status",
                 "type" => "select",
                 "options" => [
-                    ["value" => "active", "text" => "Ativo"],
-                    ["value" => "inactive", "text" => "Inativo"],
-                    ["value" => "prospect", "text" => "Prospecto"],
+                    ["value" => "active", "text" => "Ativo", "class" => "bg-green"],
+                    ["value" => "inactive", "text" => "Inativo", "class" => "bg-gray"],
+                    ["value" => "prospect", "text" => "Prospecto", "class" => "bg-purple"],
                 ]
             ]
         ];

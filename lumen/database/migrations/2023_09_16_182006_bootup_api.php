@@ -73,6 +73,7 @@ return new class extends Migration
             $table->string('value');
             $table->string('text');
             $table->unsignedBigInteger('field_id');
+            $table->string('class')->nullable();
             $table->foreign('field_id')->references('id')->on('fields')->onDelete('cascade');
             $table->timestamps();
         });
@@ -88,8 +89,7 @@ return new class extends Migration
         Schema::create('customers_files', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id');
-            // $table->string('path')->nullable();
-            $table->longText('file')->nullable();
+            $table->string('path')->nullable();
             $table->enum('type', ['folder', 'file']);
             $table->timestamps();
 

@@ -8,7 +8,6 @@ import { useRoute } from 'vue-router';
 const menuItems = ref<Array<MenuItem>>([]);
 
 const route = useRoute()
-console.log(route.path);
 
 const fetchMenuItems = async () => {
     const response = await fetch(makeRequest("menu"));
@@ -19,66 +18,60 @@ fetchMenuItems();
 </script>
 
 <template>
-    <aside id="wrap-side-bar" class="right-shadow">
-        <Suspense>
-            <template #default>
-                <section class="wrap-side-bar-item" v-for="(menuItem) of menuItems">
-                    <router-link :to="`/list-${menuItem.name}`">
-                        <span class="material-symbols-outlined">
-                            {{ menuItem.icon }}
-                        </span>
-                        <span>
-                            <p>
-                                    {{ fixHeader(menuItem.name) }}
-                            </p>
-                        </span>
-                    </router-link>
-                </section>
-            </template>
-        </Suspense>
-        <section v-if="route.path !== '/'" class="wrap-side-bar-item">
+    <aside id="wrap-side-bar">
+        <section :class="'wrap-side-bar-item ' + (route.path === `/` ? 'active' : 'inactive')">
             <router-link :to="`/`">
                 <span class="material-symbols-outlined">
                     home
                 </span>
-                <span>
-                    <p>
-                        {{translate("Home")}}
-                    </p>
-                </span>
+                <h5>
+                    {{ translate("Home") }}
+                </h5>
             </router-link>
         </section>
+        <Suspense>
+            <template #default>
+                <section v-for="(menuItem) of menuItems"
+                    :class="'wrap-side-bar-item ' + (route.params?.register?.[0] === menuItem.name ? 'active' : 'inactive')">
+                    <router-link :to="`/list-${menuItem.name}`">
+                        <span class="material-symbols-outlined">
+                            {{ menuItem.icon }}
+                        </span>
+                        <h5>
+                            {{ fixHeader(menuItem.name) }}
+                        </h5>
+                    </router-link>
+                </section>
+            </template>
+        </Suspense>
     </aside>
 </template>
 
 <style lang="scss" scoped>
 #wrap-side-bar {
-    min-height: calc(100vh - 35px);
+    min-height: 100vh;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: calc(4em + 16px);
+    width: calc(8em + 16px);
     position: fixed;
-    margin: 15px 0 0 5px;
     border-radius: 8px;
     background-color: var(--palete-color4);
     z-index: 10;
-
-    p {
-        margin: 0;
-        color: var(--palete-color5);
-        font-family: var(--roboto);
-        font-size: 0.75rem;
-    }
+    gap: 6px;
+    padding: 3em 0;
 
     .wrap-side-bar-item {
         display: flex;
         position: relative;
-        width: 100%;
         justify-content: center;
-        height: calc(4em + 16px);
-        animation: opacity 1.2s;
+        transition: all 0.15s;
+        width: 95%;
+        padding: 0 5%;
+        margin: 0 2.5%;
+        height: 2em;
+        border-radius: 12px;
 
         a {
             width: 100%;
@@ -88,11 +81,31 @@ fetchMenuItems();
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            opacity: 0.8;
+            gap: 7px;
 
-            &:hover {
-                opacity: 1;
+            span {
+                width: 20%;
+                color: var(--palete-color3) !important;
+            }
+
+            h5 {
+                width: 80%;
+                margin: 0;
+                font-size: 1rem;
+                color: var(--palete-color3) !important;
+            }
+
+        }
+
+        &.active {
+            background-color: var(--palete-color5);
+
+            a {
+                h5 {
+                    font-weight: 900;
+                }
+
+                transform: scale(1.02);
             }
         }
 

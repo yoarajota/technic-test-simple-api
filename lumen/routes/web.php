@@ -23,9 +23,9 @@ $router->get('/menu', [
     'uses' => 'RegistersController@index'
 ]);
 
-// $router->get('/download-files-customers', [
-//     'uses' => 'CustomersController@downloadFile'
-// ]);
+$router->get('/download-files-customers', [
+    'uses' => 'CustomersController@downloadFile'
+]);
 
 $router->group(['middleware' => ['request_injections']], function () use ($router) {
     $router->get('/list-[{register}]', [

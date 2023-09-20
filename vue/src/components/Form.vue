@@ -6,7 +6,7 @@ import { useRoute } from 'vue-router';
 import PageHeader from './PageHeader.vue'
 import Files from './Files.vue'
 import { HtmlHTMLAttributes } from 'vue';
-import { makeRequest, bootstrapTableTranslateFields, fixHeader } from '../helpers';
+import { makeRequest, bootstrapTableTranslateFields, fixHeader, isRequired, translate } from '../helpers';
 import { toast } from 'vue3-toastify';
 import router from '../router';
 
@@ -72,7 +72,7 @@ async function onSubmit(event: Event) {
 </script>
 
 <template>
-    <PageHeader :title="id ? register + ' ' + id : register" />
+    <PageHeader :title="id ? (fixHeader(register) + ' ' + id) : register" />
     <Suspense>
         <template #default>
             <b-form id="form" @submit="onSubmit" class="right-shadow">
@@ -92,7 +92,7 @@ async function onSubmit(event: Event) {
 
                                     <b-form-input v-if="field.type !== 'select'" :placeholder="field.label"
                                         :id="`field-list-${field.name}-${key}`" v-model="data[formPart.name][0][field.name]"
-                                        :type="field.type" required></b-form-input>
+                                        :type="field.type" :required="isRequired(field.validations)"></b-form-input>
                                 </span>
                                 <button class="material-symbols-outlined button">
                                     add
@@ -102,7 +102,7 @@ async function onSubmit(event: Event) {
 
                         <b-table sticky-header small striped hover class="list-items"
                             :items="data[formPart.name].filter((_, k) => k !== 0)"
-                            :fields="[...bootstrapTableTranslateFields(formPart.fields), { key: 'Deletar', name: 'delete' }]">
+                            :fields="[...bootstrapTableTranslateFields(formPart.fields), { key: 'Deletar', label: '', name: 'delete' }]">
 
                             <template #cell(Deletar)="name">
                                 <button class="button material-symbols-outlined" size="sm" type="button"
@@ -124,12 +124,12 @@ async function onSubmit(event: Event) {
 
                             <b-form-input v-if="field.type !== 'select'" :id="`field-${field.name}-${key}`"
                                 v-model="data[formPart.name][field.name]" :type="field.type"
-                                :placeholder="field.placeholder" required></b-form-input>
+                                :placeholder="field.placeholder" :required="isRequired(field.validations)"></b-form-input>
                         </b-form-group>
                     </span>
 
                     <span v-if="formPart?.type === 'files'" @add="receiveEmit">
-                        <Files :canDownload="!!id" :model="data[formPart.name]" />
+                        <Files :model="data[formPart.name]" />
                     </span>
                 </div>
                 <span id="wrap-submit" class="default-submit-button">

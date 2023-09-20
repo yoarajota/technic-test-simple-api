@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Files;
 use App\Helpers\Helpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -60,9 +61,10 @@ class Customers extends Model
                     $new->save();
 
                     if ($related === "customers_files") {
-                        // if ($new->type === "file") {
-                        //     $new->saveFile($dataNew['file']);
-                        // }
+                        if ($new->type === "file") {
+                            $new->path = Files::save($dataNew["file"]);
+                            $new->save();
+                        }
                         foreach ($dataNew["relations"] ?? [] as $relation) {
                             $new->recursiveStore($this->id, $relation);
                         }
@@ -89,6 +91,10 @@ class Customers extends Model
                         $related->fill($new);
                         $related->setForeignKey($this->id);
                         $related->save();
+                        if ($related->type === "file") {
+                            $related->path = Files::save($new["file"]);
+                            $related->save();
+                        }
                     } else {
                         $related = CustomersFiles::find($new["id"]);
                     }
@@ -131,10 +137,12 @@ class Customers extends Model
 
     public function scopeTranslate($query)
     {
-        return $query->select($this->getTable() . ".*", DB::raw("CASE status
+        return $query->select($this->getTable() . ".*", DB::raw(
+            "CASE status
         WHEN 'active' THEN 'Ativo'
         WHEN 'inactive' THEN 'Inativo'
         WHEN 'prospect' THEN 'Prospectivo'
-        ELSE status END AS status"));
+        ELSE status END AS status"
+        ), "status as real_status");
     }
 }
