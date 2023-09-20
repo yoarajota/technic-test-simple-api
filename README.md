@@ -15,7 +15,7 @@ Primeiramente, verifique se está sendo rodado o serviço MYSQL
 Pelo terminal, dentro da pasta do projeto, apenas rode ~ 'start .\start.bat'.
 Fique atento aos retornos dos Prompts de Comando. Alguns solicitarão algum input.
 
-Na aplicação do frontend, seu .env utiliza a rota do backend. Caso rode em uma fora do padrão,é necessário ajustá-la.
+Na aplicação do frontend, seu .env utiliza a rota do backend. Caso rode em uma fora do padrão, é necessário ajustá-la.
 
 ## Observações:
 ### por favor, leia;
@@ -26,7 +26,7 @@ Melhorias que tenho ciência de ser extremamente necessário;
 1. Design.
 2. Melhorar validação na ponta do cliente.
 3. Criar novos tipos de INPUT para validações específicas; "telefone", "documento".
-4. Utilizar o FileSystem para o gerenciamento dos arquivos (possibilita integrações com ObjectStorage, como por exemplo o s3 da AWS e o BlobStorage da Azure).
+4. Implementação de OBJECT STORAGE nos arquivos.
 5. Testes. Pensei em montar o projeto em base de TDD (Test-driven development), porém ficou apertado o tempo.
 6. Paginações.
 7. Cache.
