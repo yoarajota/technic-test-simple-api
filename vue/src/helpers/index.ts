@@ -16,12 +16,17 @@ export function bootstrapTableTranslateFields(
 
 
 export function findSelectColor(data: { [key: string]: any }) {
-  return (
-    data.field?.options.find(
-      (option: { [key: string]: any }) =>
-        option.value === data.item["real_" + data.field.key]
-    )?.class ?? ""
-  );
+  const color = data.field?.options.find(
+    (option: { [key: string]: any }) =>
+      option.value === data.item["real_" + data.field.key]
+  )?.class;
+
+  let classCss = "";
+  if (color) {
+    classCss = color + ' with-color';
+  }
+
+  return classCss;
 }
 
 export function isRequired(validations: Array<{ [key: string]: any }>) {

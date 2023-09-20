@@ -143,6 +143,11 @@ class Customers extends Model
         WHEN 'inactive' THEN 'Inativo'
         WHEN 'prospect' THEN 'Prospectivo'
         ELSE status END AS status"
-        ), "status as real_status");
+        ), "status as real_status", DB::raw(
+            "CASE person_type
+        WHEN 'natural' THEN 'Física'
+        WHEN 'legal' THEN 'Jurídica'
+        ELSE person_type END AS person_type"
+        ), "person_type as real_person_type");
     }
 }

@@ -69,10 +69,13 @@ td:has(span.td-select) {
   span {
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3px 8px;
     border-radius: 6px;
+
+    &.with-color {
+      align-items: center;
+      justify-content: center;
+      padding: 3px 8px;
+    }
   }
 }
 
@@ -86,6 +89,7 @@ td:has(span.td-select) {
 }
 
 .bg-gray {
+  justify-content: center;
   background-color: var(--palete-color3);
   color: var(--palete-color4);
 }
