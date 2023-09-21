@@ -4,7 +4,6 @@ import SideBar from './components/SideBar.vue'
 </script>
 
 <template>
-  <nav></nav>
   <SideBar />
   <main>
     <router-view />
@@ -17,7 +16,7 @@ main {
   margin: 3em 1.5em 1em calc(1.5em + (8em + 16px));
   width: 100%;
 
-    @media screen and (max-width: 375px) {
+    @media screen and (max-width: 425px) {
         width: 100vw;
         margin: 0;
     }

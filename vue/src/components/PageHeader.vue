@@ -38,7 +38,7 @@ header {
     padding: 5px 12px;
     background-color: var(--palete-color4);
 
-    @media screen and (max-width: 375px) {
+    @media screen and (max-width: 425px) {
         margin-top: 55px;
     }
 

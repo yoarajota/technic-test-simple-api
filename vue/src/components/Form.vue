@@ -188,6 +188,11 @@ async function onSubmit(event: Event) {
     padding: 10px 12px;
     border-radius: 12px;
     background-color: var(--palete-color4);
+
+    @media screen and (max-width: 425px) {
+        margin: 0 auto;
+        width: 95%;
+    }
 }
 
 #wrap-submit {

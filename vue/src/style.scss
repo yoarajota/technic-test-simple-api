@@ -16,6 +16,10 @@
   font-family: var(--roboto);
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .right-shadow {
   box-shadow: 1px 1px 12px 1px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 1px 1px 12px 1px rgba(0, 0, 0, 0.4);
@@ -92,4 +96,17 @@ td:has(span.td-select) {
   justify-content: center;
   background-color: var(--palete-color3);
   color: var(--palete-color4);
+}
+
+.list-fields {
+  overflow: scroll;
+  overflow-y: hidden;
+
+  span {
+    min-width: 120px;
+  }
+}
+
+thead {
+  z-index: 1 !important;
 }

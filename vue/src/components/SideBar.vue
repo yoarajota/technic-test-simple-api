@@ -120,12 +120,16 @@ fetchMenuItems();
         }
     }
 
-    @media screen and (max-width: 375px) {
+    @media screen and (max-width: 425px) {
         margin: 0;
         width: 100vw;
-        height: 40px;
-        min-height: 40px;
+        height: 20px;
+        min-height: 20px;
         top: 0;
+        flex-direction: row;
+        -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.75);
     }
 }
 </style>
