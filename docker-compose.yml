@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  lumen:
+    container_name: lumen
+    build: 
+      context: ./php
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/var/www
+    ports:
+      - "9000:9000"
+    working_dir: /var/www
+
+  vue:
+    image: node
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./:/srv/app
+    working_dir: /srv/app
+    command: 'npm run serve'
