@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers;
+use Illuminate\Support\Facades\Storage;
 
 class Files
 {
@@ -8,8 +9,20 @@ class Files
     {
         list($type) = explode(';', $string);
         list(, $extension) = explode('/', $type);
-        $path = uniqid() . "." . $extension;
-        file_put_contents('files/' . $path, file_get_contents($string));
-        return $path;
+        $name = uniqid() . "." . $extension;
+
+        Storage::disk(config("app.storage"))->put($name, file_get_contents($string));
+
+        return $name;
+    }
+
+    public static function get($name)
+    {
+        return Storage::disk(config("app.storage"))->get($name);
+    }
+
+    public static function delete($name)
+    {
+        return Storage::disk(config("app.storage"))->delete($name);
     }
 }

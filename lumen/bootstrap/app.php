@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__)
@@ -62,7 +62,6 @@ $app->singleton(
 $app->configure('app');
 $app->configure('filesystems');
 
-
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -75,7 +74,7 @@ $app->configure('filesystems');
 */
 
 $app->middleware([
-    App\Http\Middleware\Cors::class
+    App\Http\Middleware\Cors::class,
 ]);
 
 $app->routeMiddleware([
@@ -97,6 +96,7 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Filesystem\FilesystemServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -112,7 +112,7 @@ $app->routeMiddleware([
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__ . '/../routes/web.php';
 });
 
 return $app;

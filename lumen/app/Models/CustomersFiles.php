@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class CustomersFiles extends Model
 {
+    const TYPE_FILE = "file";
+
     protected $fillable = [
         "type",
         "customers_id",
@@ -44,7 +46,7 @@ class CustomersFiles extends Model
             $new->setForeignKeyRelation($this->id);
             $new->save();
 
-            if ($new->type === "file") {
+            if ($new->isFile()) {
                 $new->path = Files::save($data["file"]);
                 $new->save();
             }
@@ -53,5 +55,10 @@ class CustomersFiles extends Model
         foreach ($data["relations"] ?? [] as $relation) {
             $new->recursiveStore($foreign, $relation);
         }
+    }
+
+    public function isFile()
+    {
+        return $this->type === self::TYPE_FILE;
     }
 }

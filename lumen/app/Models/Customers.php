@@ -6,8 +6,6 @@ use App\Helpers\Files;
 use App\Helpers\Helpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Mockery\Matcher\Contains;
 
 class Customers extends Model
 {
@@ -61,7 +59,7 @@ class Customers extends Model
                     $new->save();
 
                     if ($related === "customers_files") {
-                        if ($new->type === "file") {
+                        if ($new->isFile()) {
                             $new->path = Files::save($dataNew["file"]);
                             $new->save();
                         }
@@ -81,17 +79,23 @@ class Customers extends Model
 
         foreach ($this->relateds as $related) {
             $model = Helpers::getModelByTableName($related);
-            $model->whereNotIn("id", $this->selectAllIds($this->filterWithId($data[$related])))->get();
+
 
             if ($related === "customers_files") {
-                foreach ($data[$related] as $new) {
+                $model->whereNotIn("id", $this->selectAllIds($this->filterWithId($data[$related])))->each(function ($each) {
+                    if ($each->isFile()) {
+                        Files::delete($each->path);
+                    }
+                    $each->delete();
+                });
 
+                foreach ($data[$related] as $new) {
                     if (!isset($new["id"])) {
                         $related = new $model;
                         $related->fill($new);
                         $related->setForeignKey($this->id);
                         $related->save();
-                        if ($related->type === "file") {
+                        if ($related->isFile()) {
                             $related->path = Files::save($new["file"]);
                             $related->save();
                         }
@@ -104,6 +108,7 @@ class Customers extends Model
                     }
                 }
             } else {
+                $model->whereNotIn("id", $this->selectAllIds($this->filterWithId($data[$related])))->delete();
                 foreach ($this->filterWithoutId($data[$related]) as $new) {
                     $newRelated = new $model;
                     $newRelated->fill($new);
