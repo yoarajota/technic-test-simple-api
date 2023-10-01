@@ -30,13 +30,13 @@ function addFolder() {
 async function addFile(event: Event) {
     const field = event?.target as HTMLInputElement;
 
-    var pointer = props.model;
+    let pointer = props.model;
     for (let index of holdPath.value) {
         pointer = pointer[index].relations;
     }
 
     if (field.files?.[0]) {
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.readAsDataURL(field.files[0]);
         reader.onload = function () {
             pointer.push({
@@ -47,9 +47,19 @@ async function addFile(event: Event) {
     }
 }
 
+function del(indexToRemove: number) {
+    let pointer = props.model;
+
+    for (let pathIndex of holdPath.value) {
+        pointer = pointer[pathIndex].relations;
+    }
+
+    pointer.splice(indexToRemove, 1);
+}
+
 function returnPreview() {
     holdPath.value.pop()
-    var pointer = props.model;
+    let pointer = props.model;
     for (let index of holdPath.value) {
         pointer = pointer[index].relations;
     }
@@ -74,7 +84,7 @@ function handle(key: number, folder: any) {
 
 async function download(path: string) {
     fetch(makeRequest('download-files-' + register + `?path=${path}`)).then(async (blob) => {
-        var file = window.URL.createObjectURL(await blob.blob());
+        let file = window.URL.createObjectURL(await blob.blob());
         window.open(file);
     });
 }
@@ -93,17 +103,23 @@ async function download(path: string) {
                 keyboard_return
             </span>
         </span>
-        <span v-for="(relation, key) of preview">
+        <span v-for="(relation, key) of preview" class="file-wrap">
             <span class="material-symbols-outlined clickable" @click="handle(key, relation)">
                 {{ relation.type === "file" ? "download" : "folder" }}
             </span>
+
+            <span class="delete-file material-symbols-outlined" @click="del(key)">
+                close
+            </span>
         </span>
-        <span id="add">
+        <span class="file-wrap add">
             <span @click="addFolder" title="Adicionar uma pasta.">
                 <span class="material-symbols-outlined clickable">
                     folder_copy
                 </span>
             </span>
+        </span>
+        <span class="file-wrap add">
             <span>
                 <label for="file" title="Adicionar um arquivo.">
                     <span class="material-symbols-outlined clickable">
@@ -125,8 +141,22 @@ async function download(path: string) {
 }
 
 
+.delete-file {
+    top: 0;
+    right: 0;
+    position: absolute;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.file-wrap {
+    position: relative;
+    border: 1px solid var(--palete-color3);
+    border-radius: 6px;
+}
+
 .wrap-files {
-    border: 1px solid var(--palete-color5);
+    border: 1px solid var(--palete-color3);
     padding: 20px 15px;
     min-height: 300px;
     display: grid;
@@ -155,7 +185,7 @@ async function download(path: string) {
     display: none;
 }
 
-#add {
+.add {
     color: var(--palete-color5);
 }
 
